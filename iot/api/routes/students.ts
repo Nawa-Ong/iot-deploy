@@ -76,7 +76,7 @@ studentsRouter.patch(
 );
 
 studentsRouter.delete("/:id", async (c) => {
-  const id = Number(c.req.param("id"));
+  const id = String(c.req.param("id"));
   const deleted = await drizzle.delete(students).where(eq(students.id, id)).returning();
   if (deleted.length === 0) {
     return c.json({ error: "Students not found" }, 404);
