@@ -1,9 +1,12 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import apiRouter from "./routes/api.js";
-import { serve } from "@hono/node-server"; // <-- Change here
+import { serve } from "@hono/node-server";
+import * as dotenv from 'dotenv';
 
-const app = new Hono().basePath("/api");
+dotenv.config();
+
+const app = new Hono();
 
 app.use(
   "*",
@@ -21,5 +24,5 @@ serve({
   fetch: app.fetch,
   port: PORT,
 }, () => {
-  console.log(`Server is running on http://localhost:${PORT}/api`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

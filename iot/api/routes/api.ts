@@ -6,19 +6,19 @@ import { env } from "hono/adapter";
 const apiRouter = new Hono();
 
 apiRouter.get("/", (c) => {
-  return c.json({ message: "Book Store API" });
+  return c.json({ message: "Student API" });
 });
 
 apiRouter.use(
   "*",
   bearerAuth({
     verifyToken: async (token, c) => {
-      const { API_SECRET } = env<{ API_SECRET: string }>(c);
-      return token === API_SECRET;
+      const apiSecret = process.env.API_SECRET;
+      return token === apiSecret;
     },
   })
 );
 
-apiRouter.route("/books", studentsRouter);
+apiRouter.route("/students", studentsRouter);
 
 export default apiRouter;

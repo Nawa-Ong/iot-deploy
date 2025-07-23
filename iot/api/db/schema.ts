@@ -11,10 +11,9 @@ import * as t from "drizzle-orm/pg-core";
 // });
 
 export const students = t.pgTable("students", {
-  id: t.varchar({ length: 255 }).primaryKey(),
+  id: t.varchar({ length: 8 }).primaryKey(),
   fname: t.varchar({ length: 255 }).notNull(),
   lname: t.varchar({ length: 255 }).notNull(),
-  std_id: t.varchar({ length: 255 }).notNull().unique(),
   birth_date: t.date().defaultNow().notNull(),
   gender: t.varchar({ length: 255 }).notNull()
 });
